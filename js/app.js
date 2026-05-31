@@ -629,8 +629,10 @@ ${css}
 <body><div class="card">${body}</div>
 <script>
   // Report height to the parent so the iframe can size itself.
+  // Use the body's box height (not documentElement.scrollHeight, which is
+  // floored by the iframe element's current height and so never shrinks).
   function report(){
-    var h=Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    var h=Math.ceil(document.body.getBoundingClientRect().height);
     parent.postMessage({type:"anki-card-height",height:h},"*");
   }
   window.addEventListener("load",report);
@@ -679,6 +681,9 @@ ${css}
     }
     index = (index + current.length) % current.length;
     const card = current[index];
+    // Reset to the base height so the frame can shrink as well as grow when
+    // the new content (e.g. hiding the answer) is shorter than before.
+    cardFrame.style.height = "260px";
     cardFrame.srcdoc = renderCard(card, answerShown);
     progressEl.textContent = `Card ${index + 1} / ${current.length}`;
     showBtn.textContent = answerShown ? "Hide Answer" : "Show Answer";
