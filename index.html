@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anki Web Player — Study .apkg decks in your browser</title>
+  <meta name="description" content="Upload an Anki .apkg file and study its cards right in your browser. Nothing is uploaded — everything runs locally." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>🃏 Anki Web Player</h1>
+    <p class="tagline">Upload an <code>.apkg</code> deck and study it in your browser. Everything runs locally — nothing is uploaded.</p>
+  </header>
+
+  <main>
+    <!-- Upload screen -->
+    <section id="upload-screen" class="screen">
+      <div id="dropzone" class="dropzone">
+        <div class="dropzone-inner">
+          <div class="dropzone-icon">📂</div>
+          <p class="dropzone-title">Drag &amp; drop your <strong>.apkg</strong> file here</p>
+          <p class="dropzone-or">or</p>
+          <button id="pick-btn" class="btn btn-primary" type="button">Choose a file</button>
+          <input id="file-input" type="file" accept=".apkg,.colpkg" hidden />
+        </div>
+      </div>
+      <p id="upload-status" class="upload-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Study screen -->
+    <section id="study-screen" class="screen hidden">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <label for="deck-select">Deck:</label>
+          <select id="deck-select"></select>
+        </div>
+        <div class="toolbar-right">
+          <span id="progress" class="progress"></span>
+          <button id="shuffle-btn" class="btn btn-ghost" type="button" title="Shuffle cards">🔀 Shuffle</button>
+          <button id="reset-btn" class="btn btn-ghost" type="button" title="Load a different deck">⬆️ New deck</button>
+        </div>
+      </div>
+
+      <div class="card-stage">
+        <iframe id="card-frame" class="card-frame" title="Card" sandbox="allow-same-origin allow-scripts"></iframe>
+      </div>
+
+      <div class="controls">
+        <button id="prev-btn" class="btn btn-ghost" type="button">⟵ Previous</button>
+        <button id="show-btn" class="btn btn-primary" type="button">Show Answer</button>
+        <button id="next-btn" class="btn btn-ghost" type="button">Next ⟶</button>
+      </div>
+      <p class="hint-keys">Shortcuts: <kbd>Space</kbd> reveal / next · <kbd>←</kbd> <kbd>→</kbd> navigate</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Built as a static site for GitHub Pages. Source on
+      <a id="repo-link" href="#" target="_blank" rel="noopener">GitHub</a>.
+      No account or server needed — your decks never leave your device.
+    </p>
+  </footer>
+
+  <!-- Third-party libraries (loaded from CDN by the visitor's browser) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
