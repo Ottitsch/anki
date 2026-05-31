@@ -1,3 +1,5 @@
+https://ottitsch.github.io/anki/  
+
 # 🃏 Anki Web Player
 
 A small, **fully client-side** website for studying Anki decks. Drop in an
